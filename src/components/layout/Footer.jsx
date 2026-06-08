@@ -44,7 +44,8 @@ export default function Footer() {
         >
           <div className="footer__brand">
             <Link to="/" className="footer__logo">
-              <span>ONE<span style={{ opacity: 0.4 }}>:</span></span>
+              <span className="footer__logo-mark" aria-hidden="true" />
+              <span>ONE<span className="footer__logo-dim">:</span></span>
             </Link>
             <p className="footer__tagline">{business.tagline}</p>
             <a href={business.instagram} target="_blank" rel="noopener noreferrer" className="footer__instagram" aria-label="Instagram">
