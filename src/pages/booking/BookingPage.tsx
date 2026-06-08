@@ -68,6 +68,7 @@ export default function BookingPage() {
   const [showSuccessAnim, setShowSuccessAnim] = useState(false);
   const continueRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const slotsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function load() {
@@ -180,7 +181,7 @@ export default function BookingPage() {
                 key={ds}
                 className={`bp-cal-day ${isSelected ? 'bp-cal-day--sel' : ''} ${disabled ? 'bp-cal-day--disabled' : ''}`}
                 disabled={disabled}
-                onClick={() => { setSelectedDate(dateObj); setSelectedSlot(null); }}
+                onClick={() => { setSelectedDate(dateObj); setSelectedSlot(null); setTimeout(() => slotsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); }}
               >
                 {d}
               </button>
@@ -519,6 +520,7 @@ export default function BookingPage() {
                       {renderCalendar()}
                     </motion.div>
                     <motion.div
+                      ref={slotsRef}
                       className="bp-slots-wrap"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -542,7 +544,7 @@ export default function BookingPage() {
                               key={slot.label}
                               variants={fadeSlideUp}
                               className={`bp-slot ${selectedSlot?.label === slot.label ? 'bp-slot--sel' : ''}`}
-                              onClick={() => setSelectedSlot(slot)}
+                              onClick={() => { setSelectedSlot(slot); setTimeout(() => continueRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50); }}
                               whileHover={{ scale: 1.03 }}
                               whileTap={{ scale: 0.97 }}
                             >
