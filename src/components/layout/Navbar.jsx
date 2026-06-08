@@ -48,7 +48,15 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => { setMenuOpen(false); }, [location]);
-  useEffect(() => { document.body.style.overflow = menuOpen ? 'hidden' : ''; return () => { document.body.style.overflow = ''; }; }, [menuOpen]);
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    const handleKeyDown = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
+    if (menuOpen) document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [menuOpen]);
 
   const scrollOrNavigate = (path) => {
     if (isHome && path.startsWith('#')) {
@@ -141,6 +149,12 @@ export default function Navbar() {
               initial="hidden"
               animate="visible"
               exit="exit"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={{ left: 0, right: 1 }}
+              onDragEnd={(_, info) => {
+                if (info.offset.x > 80) setMenuOpen(false);
+              }}
             >
               <div className="navbar__mobile-header">
                 <span className="navbar__mobile-title">Menu</span>
@@ -149,7 +163,7 @@ export default function Navbar() {
                 </button>
               </div>
               <nav className="navbar__mobile-nav">
-                {business.navLinks.map((link, i) => (
+                {business.navLinks.filter(link => link.path !== '/book').map((link, i) => (
                   <motion.div
                     key={link.path}
                     custom={i}

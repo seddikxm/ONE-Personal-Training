@@ -343,7 +343,7 @@
 .navbar__mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(30, 30, 28, 0.35);
+  background: rgba(30, 30, 28, 0.50);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: calc(var(--z-nav) + 2);
@@ -372,7 +372,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 28px 18px;
+  padding: calc(22px + env(safe-area-inset-top, 0px)) 28px 18px;
   border-bottom: 1px solid rgba(94, 139, 126, 0.08);
 }
 
@@ -388,8 +388,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   background: none;
   border: none;
   cursor: pointer;
@@ -398,6 +398,7 @@
   transition:
     background 0.2s ease,
     color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .navbar__mobile-close:hover {
@@ -421,16 +422,21 @@
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: rgba(30, 30, 28, 0.7);
+  color: var(--color-ink-soft);
   text-decoration: none;
   border-radius: 10px;
   transition:
-    background 0.2s ease,
-    color 0.2s ease;
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .navbar__mobile-link:hover {
   background: rgba(94, 139, 126, 0.05);
+  color: var(--color-ink);
+}
+
+.navbar__mobile-link:active {
+  background: rgba(94, 139, 126, 0.12);
   color: var(--color-ink);
 }
 
@@ -461,7 +467,7 @@
 
 /* ─── MOBILE FOOTER CTA ─── */
 .navbar__mobile-footer {
-  padding: 18px 18px 32px;
+  padding: 18px 18px calc(32px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid rgba(94, 139, 126, 0.08);
 }
 
@@ -471,24 +477,43 @@
   justify-content: center;
   gap: 10px;
   width: 100%;
-  padding: 16px 20px;
-  font-size: 0.9rem;
+  padding: 18px 24px;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--color-primary);
   color: var(--color-white);
   text-decoration: none;
   border: none;
+  position: relative;
+  overflow: hidden;
   transition:
     background 0.3s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar__mobile-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 14px;
 }
 
 .navbar__mobile-cta:hover {
   background: var(--color-primary-light);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(94, 139, 126, 0.3);
+}
+
+.navbar__mobile-cta:active {
+  background: #4D7A6E;
+  transform: scale(0.97);
+  box-shadow: none;
 }
 
 /* ─── BREAKPOINTS ─── */
