@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Calendar, ArrowRight, X } from 'lucide-react';
 import business from '../../config/business';
@@ -29,17 +29,27 @@ const overlayVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const menuPanelVariants = {
-  hidden: { x: '100%' },
-  visible: { x: 0, transition: { type: 'spring', stiffness: 200, damping: 40, mass: 1.1 } },
-  exit: { x: '100%', transition: { duration: 0.25, ease: [0.4, 0, 1, 1] } },
-};
-
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const panelRef = useRef(null);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const shouldReduceMotion = useReducedMotion();
+
+  const menuPanelVariants = useMemo(() => ({
+    hidden: { x: '100%' },
+    visible: {
+      x: 0,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { type: 'spring', stiffness: 200, damping: 40, mass: 1.1 },
+    },
+    exit: {
+      x: '100%',
+      transition: { duration: shouldReduceMotion ? 0 : 0.25, ease: [0.4, 0, 1, 1] },
+    },
+  }), [shouldReduceMotion]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -50,8 +60,33 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [location]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
-    const handleKeyDown = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
-    if (menuOpen) document.addEventListener('keydown', handleKeyDown);
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Tab' && menuOpen && panelRef.current) {
+        const focusable = panelRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    if (menuOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      if (panelRef.current) {
+        const firstFocusable = panelRef.current.querySelector(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (firstFocusable) setTimeout(() => firstFocusable.focus(), 0);
+      }
+    }
     return () => {
       document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKeyDown);
@@ -128,6 +163,7 @@ export default function Navbar() {
           >
             <span />
             <span />
+            <span />
           </button>
         </div>
       </div>
@@ -149,6 +185,7 @@ export default function Navbar() {
               initial="hidden"
               animate="visible"
               exit="exit"
+              ref={panelRef}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={{ left: 0, right: 1 }}
@@ -157,7 +194,7 @@ export default function Navbar() {
               }}
             >
               <div className="navbar__mobile-header">
-                <span className="navbar__mobile-title">Menu</span>
+                <h2 className="navbar__mobile-title">Menu</h2>
                 <button className="navbar__mobile-close" onClick={() => setMenuOpen(false)}>
                   <X size={22} />
                 </button>
