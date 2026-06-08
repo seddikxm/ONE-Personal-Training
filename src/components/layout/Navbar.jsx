@@ -15,12 +15,12 @@ const linkVariants = {
 };
 
 const mobileLinkVariants = {
-  hidden: { opacity: 0, x: -20 },
+  hidden: { opacity: 0, x: -24 },
   visible: (i) => ({
     opacity: 1, x: 0,
-    transition: { delay: 0.3 + i * 0.07, duration: 0.35, ease: [0.25, 0.1, 0, 1] },
+    transition: { delay: 0.22 + i * 0.05, duration: 0.45, ease: [0.25, 0.1, 0, 1] },
   }),
-  exit: { opacity: 0, x: -10, transition: { duration: 0.15 } },
+  exit: { opacity: 0, x: -12, transition: { duration: 0.12, ease: [0.4, 0, 1, 1] } },
 };
 
 const overlayVariants = {
@@ -31,8 +31,8 @@ const overlayVariants = {
 
 const menuPanelVariants = {
   hidden: { x: '100%' },
-  visible: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 32, mass: 0.8 } },
-  exit: { x: '100%', transition: { duration: 0.2, ease: [0.4, 0, 1, 1] } },
+  visible: { x: 0, transition: { type: 'spring', stiffness: 200, damping: 40, mass: 1.1 } },
+  exit: { x: '100%', transition: { duration: 0.25, ease: [0.4, 0, 1, 1] } },
 };
 
 export default function Navbar() {
@@ -185,8 +185,8 @@ export default function Navbar() {
               </nav>
               <motion.div
                 className="navbar__mobile-footer"
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.7, type: 'spring', stiffness: 200, damping: 25 } }}
+                initial={{ opacity: 0, y: 30, scale: 0.92 }}
+                animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.8, type: 'spring', stiffness: 180, damping: 28 } }}
               >
                 <Link to="/book" className="navbar__mobile-cta" onClick={() => setMenuOpen(false)}>
                   <Calendar size={16} />
