@@ -157,11 +157,8 @@ export default function Navbar() {
               }}
             >
               <div className="navbar__mobile-header">
-                <span className="navbar__mobile-title">
-                  <span className="navbar__mobile-title-mark" aria-hidden="true" />
-                  Menu
-                </span>
-                <button className="navbar__mobile-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                <span className="navbar__mobile-title">Menu</span>
+                <button className="navbar__mobile-close" onClick={() => setMenuOpen(false)}>
                   <X size={22} />
                 </button>
               </div>
