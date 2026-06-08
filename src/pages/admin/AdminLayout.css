@@ -1,0 +1,258 @@
+.al-loading-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--color-background);
+  padding: 24px;
+}
+
+.al-loading-page h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--color-ink);
+}
+
+.al-loading-page p {
+  color: var(--color-ink-soft);
+  font-size: 0.95rem;
+}
+
+.al-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: ad-spin 0.7s linear infinite;
+}
+
+@keyframes ad-spin {
+  to { transform: rotate(360deg); }
+}
+
+.al-unauthorized-icon {
+  color: var(--color-warning);
+  margin-bottom: 8px;
+}
+
+.al-unauth-signout {
+  margin-top: 16px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.al-unauth-signout:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ============================================
+   ADMIN LAYOUT
+   ============================================ */
+
+.ad-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+/* Sidebar */
+.ad-sidebar {
+  width: 250px;
+  background: var(--color-white);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: var(--z-nav);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .ad-sidebar {
+    transform: translateX(-100%);
+  }
+  .ad-sidebar--open {
+    transform: translateX(0);
+  }
+}
+
+.ad-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .ad-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: calc(var(--z-nav) - 1);
+  }
+}
+
+.ad-sidebar-brand {
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ad-sidebar-brand a {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ad-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.ad-brand-dim {
+  color: var(--color-primary);
+}
+
+.ad-brand-sub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.ad-sidebar-nav {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ad-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.ad-nav-item:hover {
+  background: var(--color-alt);
+  color: var(--color-ink);
+}
+
+.ad-nav-item--active {
+  background: rgba(94, 139, 126, 0.1);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.ad-nav-item--signout {
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.ad-nav-item--signout:hover {
+  color: var(--color-error);
+  background: var(--color-error-soft);
+}
+
+.ad-sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Main area */
+.ad-main {
+  flex: 1;
+  margin-left: 250px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .ad-main {
+    margin-left: 0;
+  }
+}
+
+.ad-header {
+  height: 64px;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-nav) - 2);
+}
+
+.ad-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.ad-menu-btn:hover {
+  background: var(--color-alt);
+  color: var(--color-ink);
+}
+
+@media (max-width: 768px) {
+  .ad-menu-btn {
+    display: flex;
+  }
+}
+
+.ad-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ad-header-email {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  font-weight: 500;
+}
+
+.ad-content {
+  flex: 1;
+  padding: 28px 32px;
+}
+
+@media (max-width: 768px) {
+  .ad-content {
+    padding: 20px 16px;
+  }
+}

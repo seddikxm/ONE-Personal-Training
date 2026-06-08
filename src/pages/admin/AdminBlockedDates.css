@@ -1,0 +1,95 @@
+.ad-blocked {
+  max-width: 700px;
+}
+
+.ad-blocked-form {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ad-blocked-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .ad-blocked-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ad-blocked-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ad-blocked-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ad-blocked-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  transition: all 0.15s;
+}
+
+.ad-blocked-item:hover {
+  box-shadow: 0 2px 12px rgba(44, 24, 16, 0.04);
+}
+
+.ad-blocked-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ad-blocked-left svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.ad-blocked-left div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ad-blocked-date {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+
+.ad-blocked-reason {
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+.ad-blocked-remove {
+  background: none;
+  border: none;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.ad-blocked-remove:hover {
+  background: var(--color-error-soft);
+  color: var(--color-error);
+}

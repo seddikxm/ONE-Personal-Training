@@ -1,0 +1,240 @@
+.ad-services {
+  max-width: 1200px;
+}
+
+.ad-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.ad-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ad-btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.ad-btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(94, 139, 126, 0.3);
+}
+
+.ad-btn-ghost {
+  background: transparent;
+  color: var(--color-ink-soft);
+  border: 1.5px solid var(--color-border);
+}
+
+.ad-btn-ghost:hover {
+  border-color: var(--color-ink-soft);
+  color: var(--color-ink);
+}
+
+/* Service grid */
+.ad-svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.ad-svc-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.ad-svc-card:hover {
+  box-shadow: 0 4px 20px rgba(44, 24, 16, 0.06);
+  transform: translateY(-1px);
+}
+
+.ad-svc-card--inactive {
+  opacity: 0.6;
+}
+
+.ad-svc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ad-svc-top h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.ad-svc-desc {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ad-svc-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
+.ad-svc-price {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.ad-svc-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
+.ad-svc-action {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--color-ink-soft);
+}
+
+.ad-svc-action:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(94, 139, 126, 0.04);
+}
+
+/* Modal */
+.ad-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  padding: 20px;
+}
+
+.ad-modal {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.ad-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0;
+}
+
+.ad-modal-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.ad-modal-close {
+  background: none;
+  border: none;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.ad-modal-close:hover {
+  background: var(--color-alt);
+  color: var(--color-ink);
+}
+
+.ad-modal-form {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ad-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ad-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.ad-field input,
+.ad-field textarea,
+.ad-field select {
+  padding: 10px 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  background: var(--color-white);
+  transition: border-color 0.2s;
+  font-family: var(--font-body);
+}
+
+.ad-field input:focus,
+.ad-field textarea:focus,
+.ad-field select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(94, 139, 126, 0.1);
+}
+
+.ad-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.ad-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.ad-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 8px;
+}

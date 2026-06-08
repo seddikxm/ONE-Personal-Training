@@ -1,0 +1,227 @@
+.ad-appointments {
+  max-width: 1400px;
+}
+
+.ad-appt-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.ad-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0 14px;
+  flex: 1;
+  min-width: 240px;
+}
+
+.ad-search-wrap svg {
+  color: var(--color-ink-soft);
+  flex-shrink: 0;
+}
+
+.ad-search-wrap input {
+  border: none;
+  background: none;
+  padding: 11px 0;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  width: 100%;
+  outline: none;
+}
+
+.ad-filter-wrap {
+  position: relative;
+}
+
+.ad-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-white);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: capitalize;
+}
+
+.ad-filter-btn:hover {
+  border-color: var(--color-ink-soft);
+}
+
+.ad-filter-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  z-index: 10;
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.ad-filter-option {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-ink);
+  text-transform: capitalize;
+  transition: background 0.1s;
+}
+
+.ad-filter-option:hover {
+  background: var(--color-alt);
+}
+
+.ad-filter-option--sel {
+  color: var(--color-primary);
+  font-weight: 600;
+  background: rgba(94, 139, 126, 0.06);
+}
+
+/* Table */
+.ad-appt-table-wrap {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.ad-appt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ad-appt-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-soft);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.ad-appt-table td {
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.ad-appt-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ad-appt-table tr:hover {
+  background: rgba(94, 139, 126, 0.02);
+}
+
+.ad-cell-name {
+  font-weight: 600;
+}
+
+.ad-cell-service {
+  color: var(--color-ink-soft);
+  font-size: 0.82rem;
+}
+
+.ad-cell-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+
+.ad-cell-phone {
+  color: var(--color-ink-soft);
+}
+
+.ad-cell-notes {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-ink-soft);
+  font-size: 0.82rem;
+}
+
+.ad-cell-actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.ad-action-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ad-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+.ad-action-btn--confirmed {
+  color: var(--color-primary);
+  border-color: rgba(94, 139, 126, 0.3);
+}
+
+.ad-action-btn--confirmed:hover {
+  background: rgba(94, 139, 126, 0.1);
+}
+
+.ad-action-btn--cancelled {
+  color: var(--color-error-text);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.ad-action-btn--cancelled:hover {
+  background: var(--color-error-soft);
+}
+
+.ad-action-btn--completed {
+  color: var(--color-success-text);
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.ad-action-btn--completed:hover {
+  background: var(--color-success-soft);
+}
+
+.ad-action-btn--pending {
+  color: var(--color-warning-text);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.ad-action-btn--pending:hover {
+  background: var(--color-warning-soft);
+}

@@ -1,0 +1,151 @@
+.ad-hours {
+  max-width: 700px;
+}
+
+.ad-saved-toast {
+  background: var(--color-success-soft);
+  color: var(--color-success-text);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.ad-hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ad-hours-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  transition: all 0.2s ease;
+}
+
+.ad-hours-row--closed {
+  opacity: 0.6;
+}
+
+.ad-hours-day {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 160px;
+}
+
+.ad-hours-day svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.ad-hours-day span {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+
+.ad-hours-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ad-hours-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  min-width: 48px;
+}
+
+/* Toggle switch */
+.ad-toggle {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.ad-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ad-toggle-track {
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--color-border);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.ad-toggle input:checked + .ad-toggle-track {
+  background: var(--color-primary);
+}
+
+.ad-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: transform 0.2s;
+}
+
+.ad-toggle input:checked + .ad-toggle-track .ad-toggle-knob {
+  transform: translateX(16px);
+}
+
+.ad-hours-times {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.ad-hours-time-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ad-hours-time-field label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ad-hours-time-field input {
+  padding: 6px 10px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  background: var(--color-white);
+  font-family: var(--font-body);
+}
+
+.ad-hours-time-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(94, 139, 126, 0.1);
+}
+
+.ad-hours-sep {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  margin-top: 16px;
+}

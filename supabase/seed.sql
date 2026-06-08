@@ -1,0 +1,3 @@
+-- Seed data is included in the migration file.
+-- This file exists to satisfy the supabase config seed path reference.
+-- The actual seed data lives in supabase/migrations/20260608121353_booking_system_schema.sql
