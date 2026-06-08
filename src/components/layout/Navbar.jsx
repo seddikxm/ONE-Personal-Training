@@ -185,13 +185,13 @@ export default function Navbar() {
               </nav>
               <motion.div
                 className="navbar__mobile-footer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0, transition: { delay: 0.7 } }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.7, type: 'spring', stiffness: 200, damping: 25 } }}
               >
                 <Link to="/book" className="navbar__mobile-cta" onClick={() => setMenuOpen(false)}>
                   <Calendar size={16} />
                   Schedule Your Session
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="navbar__cta-arrow" />
                 </Link>
               </motion.div>
             </motion.div>
