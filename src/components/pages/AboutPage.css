@@ -349,7 +349,7 @@
 }
 
 .team-carousel__header {
-  margin-bottom: var(--space-20);
+  margin-bottom: var(--space-16);
 }
 
 .team-carousel__header h3 {
@@ -425,7 +425,7 @@
   display: flex;
   justify-content: center;
   gap: var(--space-8);
-  margin-top: var(--space-40);
+  margin-top: var(--space-32);
   position: absolute;
   bottom: -48px;
   left: 0;

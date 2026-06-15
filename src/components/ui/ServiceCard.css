@@ -62,4 +62,8 @@
   .service-card__image {
     aspect-ratio: 16 / 9;
   }
+
+  .service-card__body p {
+    font-size: 0.9375rem;
+  }
 }
