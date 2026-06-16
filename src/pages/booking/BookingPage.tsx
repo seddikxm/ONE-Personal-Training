@@ -65,6 +65,7 @@ export default function BookingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [calMonth, setCalMonth] = useState(new Date());
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [showSuccessAnim, setShowSuccessAnim] = useState(false);
   const continueRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -72,16 +73,24 @@ export default function BookingPage() {
 
   useEffect(() => {
     async function load() {
-      const [servicesRes, hoursRes, blockedRes, settingsRes] = await Promise.all([
-        supabase.from('services').select('*').eq('is_active', true).order('name'),
-        supabase.from('business_hours').select('*').order('weekday'),
-        supabase.from('blocked_dates').select('*'),
-        supabase.from('business_settings').select('*').limit(1).maybeSingle(),
-      ]);
-      if (servicesRes.data) setServices(servicesRes.data as Service[]);
-      if (hoursRes.data) setBusinessHours(hoursRes.data as BusinessHours[]);
-      if (blockedRes.data) setBlockedDates(blockedRes.data as BlockedDate[]);
-      if (settingsRes.data) setSettings(settingsRes.data as BusinessSettings);
+      try {
+        const [servicesRes, hoursRes, blockedRes, settingsRes] = await Promise.all([
+          supabase.from('services').select('*').eq('is_active', true).order('name'),
+          supabase.from('business_hours').select('*').order('weekday'),
+          supabase.from('blocked_dates').select('*'),
+          supabase.from('business_settings').select('*').limit(1).maybeSingle(),
+        ]);
+        if (servicesRes.error) throw new Error(servicesRes.error.message);
+        if (hoursRes.error) throw new Error(hoursRes.error.message);
+        if (blockedRes.error) throw new Error(blockedRes.error.message);
+        if (settingsRes.error) throw new Error(settingsRes.error.message);
+        if (servicesRes.data) setServices(servicesRes.data as Service[]);
+        if (hoursRes.data) setBusinessHours(hoursRes.data as BusinessHours[]);
+        if (blockedRes.data) setBlockedDates(blockedRes.data as BlockedDate[]);
+        if (settingsRes.data) setSettings(settingsRes.data as BusinessSettings);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load booking data.');
+      }
       setLoading(false);
     }
     load();
@@ -132,7 +141,12 @@ export default function BookingPage() {
       notes: form.notes,
     });
     setSubmitting(false);
-    if (!error) { setSubmitted(true); setTimeout(() => setShowSuccessAnim(true), 100); }
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setSubmitted(true);
+    setTimeout(() => setShowSuccessAnim(true), 100);
   }
 
   function renderCalendar() {
@@ -198,6 +212,21 @@ export default function BookingPage() {
         <div className="bp-loading-container">
           <div className="al-loading-spinner" />
           <p>Preparing your experience...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bp-page">
+        <div className="bp-error-container">
+          <div className="bp-error-icon">!</div>
+          <h2>Something went wrong</h2>
+          <p>{error}</p>
+          <button className="bp-btn bp-btn-primary" onClick={() => window.location.reload()}>
+            Try Again
+          </button>
         </div>
       </div>
     );

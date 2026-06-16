@@ -4,13 +4,10 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn(
+  throw new Error(
     'Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. ' +
-    'Set them in Netlify environment variables or create a .env file.'
+    'Set them in your Vercel environment variables or .env file.'
   );
 }
 
-export const supabase =
-  supabaseUrl && supabaseAnonKey
-    ? createClient(supabaseUrl, supabaseAnonKey)
-    : null;
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
