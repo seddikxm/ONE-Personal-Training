@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  review_details: true
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - "main"
+      - "master"
+  path_instructions:
+    - path: "src/**"
+      instructions: |
+        This is a React project using Vite, Tailwind CSS, and Framer Motion.
+        Follow React best practices with functional components and hooks.
+        Use Tailwind utility classes for styling. Ensure responsive design.
+    - path: "supabase/**"
+      instructions: |
+        Follow Supabase best practices. Use parameterized queries for security.
+    - path: "*.{test,spec}.{js,jsx,ts,tsx}"
+      instructions: |
+        Ensure adequate test coverage. Test both happy paths and edge cases.
+chat:
+  auto_reply: true
+knowledge_base:
+  learnings:
+    scope: "corporate"
+  bugs:
+    scope: "corporate"
