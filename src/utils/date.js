@@ -65,3 +65,16 @@ export function isToday(dateStr) {
 export function getWeekday(dateStr) {
   return new Date(dateStr + "T00:00:00").getDay();
 }
+
+export function isWeekend(dateStr) {
+  const day = getWeekday(dateStr);
+  return day === 0 || day === 6;
+}
+
+export function daysUntil(dateStr) {
+  const target = new Date(dateStr + "T00:00:00");
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const diff = target.getTime() - now.getTime();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+}
