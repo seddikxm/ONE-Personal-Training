@@ -27,6 +27,11 @@ function formatTime(t: string) {
   return `${hour}:${String(m).padStart(2, '0')} ${ampm}`;
 }
 
+function formatDate(iso: string) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
@@ -102,7 +107,8 @@ export default function AdminAppointments() {
     return (
       a.full_name.toLowerCase().includes(q) ||
       a.email.toLowerCase().includes(q) ||
-      a.phone.includes(q)
+      a.phone.includes(q) ||
+      a.notes.toLowerCase().includes(q)
     );
   });
 
@@ -249,10 +255,12 @@ export default function AdminAppointments() {
               <thead>
                 <tr>
                   <th>Client</th>
+                  <th>Phone</th>
                   <th>Service</th>
                   <th>Date</th>
                   <th>Time</th>
                   <th>Status</th>
+                  <th>Notes</th>
                   <th><span className="aa-sr-label">Actions</span></th>
                 </tr>
               </thead>
@@ -271,7 +279,11 @@ export default function AdminAppointments() {
                         <div className="aa-client-info">
                           <span className="aa-client-name">{appt.full_name}</span>
                           <span className="aa-client-contact">{appt.email}</span>
+                          <span className="aa-created-at">Booked {formatDate(appt.created_at)}</span>
                         </div>
+                      </td>
+                      <td className="aa-cell-phone">
+                        <span className="aa-phone">{appt.phone}</span>
                       </td>
                       <td className="aa-cell-service">
                         <span className="aa-service-name">{services[appt.service_id] || 'Unknown Service'}</span>
@@ -288,6 +300,13 @@ export default function AdminAppointments() {
                           <StatusIcon size={12} />
                           {statusCfg.label}
                         </span>
+                      </td>
+                      <td className="aa-cell-notes">
+                        {appt.notes ? (
+                          <span className="aa-notes" title={appt.notes}>{appt.notes}</span>
+                        ) : (
+                          <span className="aa-notes aa-notes--empty">—</span>
+                        )}
                       </td>
                       <td className="aa-cell-actions">
                         <div className="aa-action-menu" ref={openMenuId === appt.id ? menuRef : undefined}>
@@ -369,10 +388,18 @@ export default function AdminAppointments() {
                       <span>Email</span>
                       <span>{appt.email}</span>
                     </div>
-                    {appt.phone && (
-                      <div className="aa-card-row">
-                        <span>Phone</span>
-                        <span>{appt.phone}</span>
+                    <div className="aa-card-row">
+                      <span>Phone</span>
+                      <span>{appt.phone || '—'}</span>
+                    </div>
+                    <div className="aa-card-row">
+                      <span>Booked</span>
+                      <span>{formatDate(appt.created_at)}</span>
+                    </div>
+                    {appt.notes && (
+                      <div className="aa-card-row aa-card-row--notes">
+                        <span>Notes</span>
+                        <span>{appt.notes}</span>
                       </div>
                     )}
                   </div>

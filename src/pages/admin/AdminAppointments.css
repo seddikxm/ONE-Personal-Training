@@ -410,6 +410,22 @@
   color: #8C7B6B;
 }
 
+.aa-created-at {
+  font-size: 0.7rem;
+  color: #B8A99A;
+  margin-top: 1px;
+}
+
+/* ───── Phone cell ───── */
+.aa-cell-phone { }
+
+.aa-phone {
+  font-size: 0.82rem;
+  color: #2C1810;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 /* ───── Service cell ───── */
 .aa-cell-service { }
 
@@ -476,6 +492,36 @@
 .aa-status-badge--completed {
   background: #F0FDF4;
   color: #166534;
+}
+
+/* ───── Notes cell ───── */
+.aa-cell-notes {
+  max-width: 200px;
+}
+
+.aa-notes {
+  display: block;
+  font-size: 0.82rem;
+  color: #2C1810;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+}
+
+.aa-notes--empty {
+  color: #D4CEC2;
+}
+
+/* ───── Card notes ───── */
+.aa-card-row--notes span:last-child {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #8C7B6B;
+  max-width: 60%;
+  text-align: right;
 }
 
 /* ───── Actions ───── */

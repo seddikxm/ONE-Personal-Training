@@ -192,6 +192,15 @@
   color: var(--color-ink-soft);
 }
 
+.ad-upcoming-contact {
+  font-size: 0.72rem;
+  color: #B8A99A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
 .ad-upcoming-right {
   display: flex;
   align-items: center;

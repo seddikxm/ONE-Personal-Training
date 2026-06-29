@@ -17,6 +17,7 @@ export default function AdminDashboard() {
     activeServices: 0,
   });
   const [upcomingAppts, setUpcomingAppts] = useState<Appointment[]>([]);
+  const [serviceNames, setServiceNames] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,11 +26,15 @@ export default function AdminDashboard() {
 
       const [apptsRes, servicesRes] = await Promise.all([
         supabase.from('appointments').select('*').order('appointment_date', { ascending: true }),
-        supabase.from('services').select('*', { count: 'exact', head: true }).eq('is_active', true),
+        supabase.from('services').select('id, name'),
       ]);
 
       const appointments = (apptsRes.data || []) as Appointment[];
-      const activeCount = servicesRes.count ?? 0;
+      const svcData = (servicesRes.data || []) as Pick<Service, 'id' | 'name'>[];
+      const svcMap: Record<string, string> = {};
+      svcData.forEach((s) => { svcMap[s.id] = s.name; });
+      setServiceNames(svcMap);
+      const activeCount = svcData.length;
 
       const pending = appointments.filter((a) => a.status === 'pending').length;
       const confirmed = appointments.filter((a) => a.status === 'confirmed').length;
@@ -117,11 +122,12 @@ export default function AdminDashboard() {
                 <div key={appt.id} className="ad-upcoming-item">
                   <div className="ad-upcoming-left">
                     <span className="ad-upcoming-name">{appt.full_name}</span>
-                    <span className="ad-upcoming-service">{appt.service_id.slice(0, 8)}...</span>
+                    <span className="ad-upcoming-service">{serviceNames[appt.service_id] || 'Unknown Service'}</span>
+                    <span className="ad-upcoming-contact">{appt.email} · {appt.phone}</span>
                   </div>
                   <div className="ad-upcoming-right">
                     <span className="ad-upcoming-date">{appt.appointment_date}</span>
-                    <span className="ad-upcoming-time">{appt.start_time}</span>
+                    <span className="ad-upcoming-time">{appt.start_time.slice(0, 5)} – {appt.end_time.slice(0, 5)}</span>
                     <span className={`ad-badge ad-badge--${appt.status}`}>{appt.status}</span>
                   </div>
                 </div>
